@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { User } from 'src/app/shared/components/interfaces';
+import { User } from 'src/app/shared/interfaces';
 
 import { AuthService } from '../../shared/services/auth.service';
 
@@ -26,6 +26,8 @@ export class LoginPageComponent implements OnInit {
     this.route.queryParams.subscribe((params: Params) => {
       if (params['loginAgain']) {
         this.alertMessage = 'Please log in';
+      } else if (params['authFailed']) {
+        this.alertMessage = 'Session expired. Please, log in again';
       }
     });
 
@@ -44,7 +46,7 @@ export class LoginPageComponent implements OnInit {
     return isFieldTouched && isFieldInvalid;
   }
 
-  submit() {
+  submit(): void {
     if (this.form.invalid) {
       return;
     }

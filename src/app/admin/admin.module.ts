@@ -11,7 +11,6 @@ import { EditPageComponent } from './pages/edit-page/edit-page.component';
 
 import { SharedModule } from '../shared/shared.module';
 
-import { AuthService } from './shared/services/auth.service';
 import { AuthGuard } from './shared/services/auth.guard';
 
 @NgModule({
@@ -54,6 +53,6 @@ import { AuthGuard } from './shared/services/auth.guard';
     ]),
   ],
   exports: [RouterModule],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthGuard],
 })
 export class AdminModule {}
