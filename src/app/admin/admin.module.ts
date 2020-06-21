@@ -9,6 +9,8 @@ import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.co
 import { CreatePageComponent } from './pages/create-page/create-page.component';
 import { EditPageComponent } from './pages/edit-page/edit-page.component';
 
+import { SearchPipe } from './shared/search.pipe';
+
 import { SharedModule } from '../shared/shared.module';
 
 import { AuthGuard } from './shared/services/auth.guard';
@@ -20,6 +22,7 @@ import { AuthGuard } from './shared/services/auth.guard';
     DashboardPageComponent,
     CreatePageComponent,
     EditPageComponent,
+    SearchPipe,
   ],
   imports: [
     CommonModule,
