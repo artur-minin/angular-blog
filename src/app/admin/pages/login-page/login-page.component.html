@@ -1,6 +1,14 @@
 <form class="class" [formGroup]="form" (ngSubmit)="submit()">
   <h2>Log in to admin panel</h2>
 
+  <div class="alert alert-info" *ngIf="alertMessage">
+    {{ alertMessage }}
+  </div>
+
+  <div class="alert alert-danger" *ngIf="auth.error$ | async as error">
+    {{ error }}
+  </div>
+
   <div
     class="form-control"
     [ngClass]="{ invalid: isFormFieldInvalid('email') }"
@@ -34,7 +42,11 @@
     </div>
   </div>
 
-  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="form.invalid || submitted"
+  >
     Log in
   </button>
 </form>
