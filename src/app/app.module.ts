@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, Provider } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import enGBLocale from '@angular/common/locales/en-GB';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -13,6 +15,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AuthInterceptor } from './shared/auth.interceptor';
+
+registerLocaleData(enGBLocale, 'en-GB');
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
