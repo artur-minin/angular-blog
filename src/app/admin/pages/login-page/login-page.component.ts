@@ -13,7 +13,7 @@ import { AuthService } from '../../shared/services/auth.service';
 })
 export class LoginPageComponent implements OnInit {
   form: FormGroup;
-  submitted = false;
+  submitting = false;
   alertMessage: string;
 
   constructor(
@@ -51,7 +51,7 @@ export class LoginPageComponent implements OnInit {
       return;
     }
 
-    this.submitted = true;
+    this.submitting = true;
 
     const user: User = {
       email: this.form.value.email,
@@ -62,10 +62,10 @@ export class LoginPageComponent implements OnInit {
       next: () => {
         this.form.reset();
         this.router.navigate(['/admin', 'dashboard']);
-        this.submitted = false;
+        this.submitting = false;
       },
       error: () => {
-        this.submitted = false;
+        this.submitting = false;
       },
     });
   }

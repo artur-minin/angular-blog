@@ -15,7 +15,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   searchStr = '';
 
   postsSubscription: Subscription;
-  deletePostsSubscription: Subscription;
+  deletePostSubscription: Subscription;
 
   constructor(private postsService: PostsService) {}
 
@@ -31,13 +31,13 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
     if (this.postsSubscription) {
       this.postsSubscription.unsubscribe();
     }
-    if (this.deletePostsSubscription) {
-      this.deletePostsSubscription.unsubscribe();
+    if (this.deletePostSubscription) {
+      this.deletePostSubscription.unsubscribe();
     }
   }
 
   deletePost(postId: string): void {
-    this.deletePostsSubscription = this.postsService
+    this.deletePostSubscription = this.postsService
       .deletePost(postId)
       .subscribe(() => {
         this.posts = this.posts.filter((post) => post.id !== postId);

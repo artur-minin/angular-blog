@@ -12,7 +12,7 @@ import { PostsService } from 'src/app/shared/posts.service';
 })
 export class CreatePageComponent implements OnInit {
   form: FormGroup;
-  submitted = false;
+  submitting = false;
 
   constructor(private postsService: PostsService) {}
 
@@ -35,7 +35,7 @@ export class CreatePageComponent implements OnInit {
       return;
     }
 
-    this.submitted = true;
+    this.submitting = true;
 
     const post: Post = {
       title: this.form.value.title,
@@ -47,10 +47,10 @@ export class CreatePageComponent implements OnInit {
     this.postsService.create(post).subscribe({
       next: () => {
         this.form.reset();
-        this.submitted = false;
+        this.submitting = false;
       },
       error: () => {
-        this.submitted = false;
+        this.submitting = false;
       },
     });
   }
