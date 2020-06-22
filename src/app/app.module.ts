@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, Provider } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -27,7 +28,12 @@ const INTERCEPTOR_PROVIDER: Provider = {
     PostPageComponent,
     PostComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, SharedModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    SharedModule,
+  ],
   providers: [INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent],
 })
