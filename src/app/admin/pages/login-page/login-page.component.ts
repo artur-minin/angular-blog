@@ -6,6 +6,8 @@ import { User } from 'src/app/shared/interfaces';
 
 import { AuthService } from '../../shared/services/auth.service';
 
+import { isFormFieldInvalid } from 'src/app/shared/utils';
+
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -13,8 +15,8 @@ import { AuthService } from '../../shared/services/auth.service';
 })
 export class LoginPageComponent implements OnInit {
   form: FormGroup;
-  submitting = false;
   alertMessage: string;
+  isSubmitting = false;
 
   constructor(
     public auth: AuthService,
@@ -40,18 +42,14 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
-  isFormFieldInvalid(fieldName: string): boolean {
-    const isFieldTouched: boolean = this.form.get(fieldName).touched;
-    const isFieldInvalid: boolean = this.form.get(fieldName).invalid;
-    return isFieldTouched && isFieldInvalid;
-  }
+  isFieldInvalid = isFormFieldInvalid;
 
   submit(): void {
     if (this.form.invalid) {
       return;
     }
 
-    this.submitting = true;
+    this.isSubmitting = true;
 
     const user: User = {
       email: this.form.value.email,
@@ -62,10 +60,10 @@ export class LoginPageComponent implements OnInit {
       next: () => {
         this.form.reset();
         this.router.navigate(['/admin', 'dashboard']);
-        this.submitting = false;
+        this.isSubmitting = false;
       },
       error: () => {
-        this.submitting = false;
+        this.isSubmitting = false;
       },
     });
   }

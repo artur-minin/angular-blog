@@ -11,11 +11,11 @@
 
   <div
     class="form-control"
-    [ngClass]="{ invalid: isFormFieldInvalid('email') }"
+    [ngClass]="{ invalid: isFieldInvalid(form, 'email') }"
   >
     <label for="email">Email:</label>
     <input id="email" type="email" formControlName="email" />
-    <div *ngIf="isFormFieldInvalid('email')" class="validation">
+    <div *ngIf="isFieldInvalid(form, 'email')" class="validation">
       <small *ngIf="form.get('email').errors.required">Email is required</small>
       <small *ngIf="form.get('email').errors.email">Email is invalid</small>
     </div>
@@ -23,11 +23,11 @@
 
   <div
     class="form-control"
-    [ngClass]="{ invalid: isFormFieldInvalid('password') }"
+    [ngClass]="{ invalid: isFieldInvalid(form, 'password') }"
   >
     <label for="password">Password:</label>
     <input id="password" type="password" formControlName="password" />
-    <div *ngIf="isFormFieldInvalid('password')" class="validation">
+    <div *ngIf="isFieldInvalid(form, 'password')" class="validation">
       <small *ngIf="form.get('password').errors.required"
         >Password is required</small
       >
@@ -45,7 +45,7 @@
   <button
     type="submit"
     class="btn btn-primary"
-    [disabled]="form.invalid || submitting"
+    [disabled]="form.invalid || isSubmitting"
   >
     Log in
   </button>

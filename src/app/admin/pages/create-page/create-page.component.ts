@@ -6,6 +6,8 @@ import { Post } from 'src/app/shared/interfaces';
 import { PostsService } from 'src/app/shared/posts.service';
 import { AlertService } from '../../shared/services/alert.service';
 
+import { isFormFieldInvalid } from 'src/app/shared/utils';
+
 @Component({
   selector: 'app-create-page',
   templateUrl: './create-page.component.html',
@@ -13,7 +15,7 @@ import { AlertService } from '../../shared/services/alert.service';
 })
 export class CreatePageComponent implements OnInit {
   form: FormGroup;
-  submitting = false;
+  isSubmitting = false;
 
   constructor(
     private postsService: PostsService,
@@ -28,18 +30,14 @@ export class CreatePageComponent implements OnInit {
     });
   }
 
-  isFormFieldInvalid(fieldName: string): boolean {
-    const isFieldTouched: boolean = this.form.get(fieldName).touched;
-    const isFieldInvalid: boolean = this.form.get(fieldName).invalid;
-    return isFieldTouched && isFieldInvalid;
-  }
+  isFieldInvalid = isFormFieldInvalid;
 
   submit(): void {
     if (this.form.invalid) {
       return;
     }
 
-    this.submitting = true;
+    this.isSubmitting = true;
 
     const post: Post = {
       title: this.form.value.title,
@@ -51,12 +49,12 @@ export class CreatePageComponent implements OnInit {
     this.postsService.create(post).subscribe({
       next: () => {
         this.form.reset();
-        this.submitting = false;
+        this.isSubmitting = false;
 
         this.alert.success('Post was created!');
       },
       error: () => {
-        this.submitting = false;
+        this.isSubmitting = false;
       },
     });
   }

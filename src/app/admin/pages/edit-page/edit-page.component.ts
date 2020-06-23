@@ -9,6 +9,8 @@ import { Post } from 'src/app/shared/interfaces';
 import { PostsService } from 'src/app/shared/posts.service';
 import { AlertService } from '../../shared/services/alert.service';
 
+import { isFormFieldInvalid } from 'src/app/shared/utils';
+
 @Component({
   selector: 'app-edit-page',
   templateUrl: './edit-page.component.html',
@@ -17,7 +19,7 @@ import { AlertService } from '../../shared/services/alert.service';
 export class EditPageComponent implements OnInit, OnDestroy {
   form: FormGroup;
   post: Post;
-  submitting = false;
+  isSubmitting = false;
 
   updatePostSubscription: Subscription;
 
@@ -49,18 +51,14 @@ export class EditPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  isFormFieldInvalid(fieldName: string): boolean {
-    const isFieldTouched: boolean = this.form.get(fieldName).touched;
-    const isFieldInvalid: boolean = this.form.get(fieldName).invalid;
-    return isFieldTouched && isFieldInvalid;
-  }
+  isFieldInvalid = isFormFieldInvalid;
 
   submit() {
     if (this.form.invalid) {
       return;
     }
 
-    this.submitting = true;
+    this.isSubmitting = true;
 
     this.updatePostSubscription = this.postsService
       .updatePost({
@@ -70,7 +68,7 @@ export class EditPageComponent implements OnInit, OnDestroy {
       })
       .subscribe({
         next: () => {
-          this.submitting = false;
+          this.isSubmitting = false;
 
           this.alert.success('Post was updated!');
         },

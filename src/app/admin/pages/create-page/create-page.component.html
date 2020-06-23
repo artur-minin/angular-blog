@@ -3,22 +3,22 @@
 
   <div
     class="form-control"
-    [ngClass]="{ invalid: isFormFieldInvalid('title') }"
+    [ngClass]="{ invalid: isFieldInvalid(form, 'title') }"
   >
     <label for="title">Title:</label>
     <input id="title" type="text" formControlName="title" />
-    <div *ngIf="isFormFieldInvalid('title')" class="validation">
+    <div *ngIf="isFieldInvalid(form, 'title')" class="validation">
       <small *ngIf="form.get('title').errors.required">Field is required</small>
     </div>
   </div>
 
   <div
     class="form-control"
-    [ngClass]="{ invalid: isFormFieldInvalid('author') }"
+    [ngClass]="{ invalid: isFieldInvalid(form, 'author') }"
   >
     <label for="author">Author:</label>
     <input id="author" type="text" formControlName="author" />
-    <div *ngIf="isFormFieldInvalid('author')" class="validation">
+    <div *ngIf="isFieldInvalid(form, 'author')" class="validation">
       <small *ngIf="form.get('author').errors.required"
         >Field is required</small
       >
@@ -33,7 +33,7 @@
   <button
     type="submit"
     class="btn btn-block btn-dark"
-    [disabled]="form.invalid || submitting"
+    [disabled]="form.invalid || isSubmitting"
   >
     Create post
   </button>
