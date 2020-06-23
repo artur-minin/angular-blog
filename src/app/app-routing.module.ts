@@ -13,6 +13,7 @@ const routes: Routes = [
       { path: '', redirectTo: '/', pathMatch: 'full' },
       { path: '', component: HomePageComponent },
       { path: 'post/:id', component: PostPageComponent },
+      { path: '**', redirectTo: '/' },
     ],
   },
   {
