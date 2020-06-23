@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, Provider } from '@angular/core';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { registerLocaleData } from '@angular/common';
 import enGBLocale from '@angular/common/locales/en-GB';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -15,6 +16,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AuthInterceptor } from './shared/auth.interceptor';
+
+import { environment } from '../environments/environment';
 
 registerLocaleData(enGBLocale, 'en-GB');
 
@@ -37,6 +40,9 @@ const INTERCEPTOR_PROVIDER: Provider = {
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
   ],
   providers: [INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent],
